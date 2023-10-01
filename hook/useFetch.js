@@ -17,34 +17,35 @@ const useFetch = (endpoint, query) => {
       "X-RapidAPI-Host": "jsearch.p.rapidapi.com",
     },
     params: {
-      ...query
+      ...query,
     },
   };
   const fetchData = async () => {
     setIsLoading(true);
-    try{
-        const response = await axios.request(options);
-        setData({...response.data});
-        setIsLoading(false);
+    try {
+      const response = await axios.request(options);
+      setData((prev) => {
+        return { ...prev, ...response.data };
+      });
+      setIsLoading(false);
+    } catch (err) {
+      setError(err);
+      console.log(err);
+      alert("There was an error fetching");
+    } finally {
+      setIsLoading(false);
     }
-    catch(err){
-        setError(err);
-        alert('There was an error fetching');
-    }
-    finally{
-        setIsLoading(false)
-    }
-  }
+  };
 
   useEffect(() => {
-    fetchData()
-  },[])
+    fetchData();
+  }, []);
 
   const refetch = () => {
     setIsLoading(true);
-    fetchData()
-  }
-  return { data, isLoading, error, refetch }
+    fetchData();
+  };
+  return { data, isLoading, error, refetch };
 };
 
 export default useFetch;
