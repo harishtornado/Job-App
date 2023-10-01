@@ -8,6 +8,17 @@
       "expo-router"
     ],
     "name": "job-app",
-    "slug": "job-app"
+    "slug": "job-app",
+    "android": {
+      "package": "com.harishjs.jobapp"
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "d689f558-b1c3-426f-b91c-c05ec0e7cc0e"
+      }
+    }
   }
 }
